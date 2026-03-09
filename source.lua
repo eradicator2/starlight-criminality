@@ -2918,8 +2918,8 @@ AboutLeftGroup:AddLabel("cw.yw")
 AboutLeftGroup:AddLabel("7wk5")
 AboutLeftGroup:AddDivider()
 AboutLeftGroup:AddLabel("starlight.cc Script")
-AboutLeftGroup:AddLabel("Version: 1.2.1")
-AboutLeftGroup:AddLabel("Updated: 28.02.2026")
+AboutLeftGroup:AddLabel("Version: 1.2.0")
+AboutLeftGroup:AddLabel("Updated: 26.02.2026")
 
 local AboutLeftGroup = Tabs.About:AddLeftGroupbox("ChangeLogs")
 AboutLeftGroup:AddLabel("Added:Aimbot System ")
@@ -2928,8 +2928,6 @@ AboutLeftGroup:AddLabel("Updated:ESP")
 AboutLeftGroup:AddLabel("Infinite stamina")
 AboutLeftGroup:AddLabel("Free cam and blur")
 AboutLeftGroup:AddLabel("Added Sticky Aim")
-AboutLeftGroup:AddLabel("Added World Effects")
-AboutLeftGroup:AddLabel("No Recoil (high lvl exc olny)")
 
 -- Правая часть вкладки About: Discord
 local AboutRightGroup = Tabs.About:AddRightGroupbox("Discord")
@@ -8155,3 +8153,4 @@ _G.SAAPI = {
 
 Lib:Notify("SA Ready!", 3)
 end
+
