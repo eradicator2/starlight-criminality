@@ -12,6 +12,7 @@ local Lt = game:GetService("Lighting")
 
 local LP = Plrs.LocalPlayer
 local Cam = workspace.CurrentCamera
+local HAS_DRAWING = (type(Drawing) == "table" and type(Drawing.new) == "function")
 
 local EvFolder = RepSt:WaitForChild("Events")
 local GNX = EvFolder:WaitForChild("GNX_S")
@@ -2138,9 +2139,9 @@ end
 
 local function crLine(sPos, ePos, col)
     if not BB.On or not sPos or not ePos then return nil end
+    if not HAS_DRAWING then return nil end
     local line
     local suc, err = pcall(function()
-        if not Drawing then error("Drawing lib not available") end
         line = Drawing.new("Line")
         line.Visible = true
         line.From = Vector2.new(sPos.X, sPos.Y)
@@ -7558,6 +7559,10 @@ CLLines = {}; CLDot = nil; CLCircle = nil; TargInd = nil; HitInd = nil
 
 function Crosshair:Setup()
     self:Remove()
+    if not HAS_DRAWING then
+        Lib:Notify("Drawing not available; crosshair disabled", 3)
+        return
+    end
     for i=1,4 do CLLines[i] = Drawing.new("Line"); CLLines[i].Visible = false; CLLines[i].Color = self.Col; CLLines[i].Thickness = self.Thick; CLLines[i].ZIndex = 999 end
     CLDot = Drawing.new("Circle"); CLDot.Visible = false; CLDot.Color = self.Col; CLDot.Thickness = self.Thick; CLDot.Filled = true; CLDot.NumSides = 12; CLDot.Radius = 2; CLDot.ZIndex = 999
     TargInd = Drawing.new("Circle"); TargInd.Visible = false; TargInd.Color = Color3.fromRGB(255,0,0); TargInd.Thickness = 2; TargInd.Filled = false; TargInd.NumSides = 24; TargInd.Radius = 20; TargInd.ZIndex = 998
@@ -7566,6 +7571,10 @@ function Crosshair:Setup()
 end
 
 function Crosshair:Update()
+    if not HAS_DRAWING then
+        self.On = false
+        return
+    end
     if not self.On then for i=1,4 do if CLLines[i] then CLLines[i].Visible = false end end; if CLDot then CLDot.Visible = false end; if CLCircle then CLCircle.Visible = false end; if TargInd then TargInd.Visible = false end; return end
     local sc = Vector2.new(Cam.ViewportSize.X/2, Cam.ViewportSize.Y/2)
     if self.Style == "Cross" then
